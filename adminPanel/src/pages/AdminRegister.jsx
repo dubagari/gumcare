@@ -23,7 +23,7 @@ const AdminRegister = () => {
   const dispatch = useDispatch();
   const { isLoading, user: currentUser } = useSelector((state) => state.auth);
   const token = currentUser?.token;
-  // const API_URL = "/api";
+  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -36,7 +36,7 @@ const AdminRegister = () => {
     e.preventDefault();
     try {
       dispatch(signinStart());
-      const res = await fetch(`/api/admin/signupadmin`, {
+      const res = await fetch(`${API}/admin/signupadmin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -24,6 +24,8 @@ const AdminLogin = () => {
   const navigatedRef = useRef(false);
   const alertShownRef = useRef(false);
 
+  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth,
   );
@@ -64,7 +66,7 @@ const AdminLogin = () => {
     alertShownRef.current = false;
     try {
       dispatch(signinStart());
-      const res = await fetch(`/api/auth/loginadmin`, {
+      const res = await fetch(`${API}/auth/loginadmin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

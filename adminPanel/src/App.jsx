@@ -21,6 +21,7 @@ export default function App() {
             <Route path="products" element={<AdminProducts />} />
             <Route path="products/add" element={<AddProduct />} />
             <Route path="orders" element={<AdminOrders />} />
+            <Route path="register" element={<AdminRegister />} />
             <Route path="users" element={<Users />} />
           </Route>
         </Route>

@@ -22,6 +22,7 @@ const allowedOrigins = [
   "http://localhost:5174",
   "https://gumcare.vercel.app",
   "https://admin-panel-mauve-xi-68.vercel.app",
+  "https://gumcare-1wksp4q0u-abubakar-dubagari-s-projects.vercel.app",
 ];
 
 app.use(

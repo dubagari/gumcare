@@ -53,13 +53,23 @@ const Shop = () => {
     }
   }, [status, dispatch]);
 
-  const handleAddToCart = (e, product) => {
-    e.preventDefault();
+  // const handleAddToCart = (e, product) => {
+  //   e.preventDefault();
+  //   if (!user) {
+  //     dispatch(addToCartLocal({ product, quantity: 1 }));
+  //     return;
+  //   }
+  //   dispatch(addToCartAsync({ productId: product._id, quantity: 1 }));
+  // };
+
+  const handleAddToCart = (productId) => {
     if (!user) {
-      dispatch(addToCartLocal({ product, quantity: 1 }));
+      toast.error("Please login to add items to cart");
+      navigate("/login");
       return;
     }
-    dispatch(addToCartAsync({ productId: product._id, quantity: 1 }));
+
+    dispatch(addToCartAsync({ productId, quantity: 1 }));
   };
 
   const isInWishlist = (product) =>

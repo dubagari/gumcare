@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 const API_URL = `${API_BASE}/api/cart`;
 
 // Helper to get headers with token from state
@@ -64,20 +64,51 @@ export const fetchCart = createAsyncThunk(
   },
 );
 
+// export const addToCartAsync = createAsyncThunk(
+//   "cart/addToCart",
+//   async (itemData, thunkAPI) => {
+//     try {
+//       const response = await fetch(`${API_URL}/add`, {
+//         method: "POST",
+//         headers: getHeaders(thunkAPI),
+//         body: JSON.stringify(itemData),
+//       });
+//       const data = await safeParseJSON(response);
+//       if (!response.ok)
+//         return thunkAPI.rejectWithValue(
+//           data.message || "Failed to add to cart",
+//         );
+//       return data;
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error.message);
+//     }
+//   },
+// );
+
 export const addToCartAsync = createAsyncThunk(
   "cart/addToCart",
   async (itemData, thunkAPI) => {
+    const token = thunkAPI.getState().auth.user?.token;
+
+    if (!token) {
+      return thunkAPI.rejectWithValue("Please login to add items to cart");
+    }
+
     try {
       const response = await fetch(`${API_URL}/add`, {
         method: "POST",
         headers: getHeaders(thunkAPI),
         body: JSON.stringify(itemData),
       });
+
       const data = await safeParseJSON(response);
-      if (!response.ok)
+
+      if (!response.ok) {
         return thunkAPI.rejectWithValue(
           data.message || "Failed to add to cart",
         );
+      }
+
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

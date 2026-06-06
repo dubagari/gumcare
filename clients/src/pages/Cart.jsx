@@ -231,12 +231,22 @@ const Cartpage = () => {
     }
   };
 
+  // const handleQuantityChange = (productId, qty) => {
+  //   if (user) {
+  //     dispatch(addToCartAsync({ productId, quantity: qty }));
+  //   } else {
+  //     dispatch(updateCartQuantityLocal({ productId, change: qty }));
+  //   }
+  // };
+
   const handleQuantityChange = (productId, qty) => {
-    if (user) {
-      dispatch(addToCartAsync({ productId, quantity: qty }));
-    } else {
-      dispatch(updateCartQuantityLocal({ productId, change: qty }));
+    if (!user) {
+      toast.error("Please login to add items to cart");
+      navigate("/login");
+      return;
     }
+
+    dispatch(addToCartAsync({ productId, quantity: qty }));
   };
 
   // Safe totals calculation for UI

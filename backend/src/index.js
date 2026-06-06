@@ -22,17 +22,18 @@ const allowedOrigins = [
   "http://localhost:5174",
   "https://gumcare.vercel.app",
   "https://admin-panel-mauve-xi-68.vercel.app",
-  "https://gumcare-1wksp4q0u-abubakar-dubagari-s-projects.vercel.app",
 ];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("CORS not allowed"));
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin) || origin.endsWith(".vercel.app")) {
+        return callback(null, true);
       }
+
+      callback(new Error("CORS not allowed"));
     },
     credentials: true,
   }),

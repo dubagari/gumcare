@@ -23,8 +23,7 @@ const PaymentLoading = () => {
       const token = JSON.parse(localStorage.getItem("user"))?.token;
 
       try {
-        const API_BASE =
-          import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+        const API_BASE = import.meta.env.VITE_API_BASE_URL;
         const res = await fetch(`${API_BASE}/api/payment/verify`, {
           method: "POST",
           headers: {

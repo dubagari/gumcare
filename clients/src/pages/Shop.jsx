@@ -15,7 +15,7 @@ import { addToCartAsync, addToCartLocal } from "../redux/cartSlice";
 import { addToWishlist, removeFromWishlist } from "../redux/wishlistSlice";
 import { fetchProducts } from "../redux/productSlice";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 const getProductImageUrl = (product) => {
   let imagePath = "";

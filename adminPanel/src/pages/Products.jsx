@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const getImageUrl = (imagePath) => {
   if (!imagePath) return "";
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
   // Avoid double slashes - if path already starts with /, don't add another
   return imagePath.startsWith("http")
     ? imagePath

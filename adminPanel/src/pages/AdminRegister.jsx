@@ -23,7 +23,7 @@ const AdminRegister = () => {
   const dispatch = useDispatch();
   const { isLoading, user: currentUser } = useSelector((state) => state.auth);
   const token = currentUser?.token;
-  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+  const API = import.meta.env.VITE_API_BASE_URL;
 
   const onChange = (e) => {
     setFormData((prevState) => ({

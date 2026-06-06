@@ -30,6 +30,8 @@ const AddProduct = () => {
     images: [],
   });
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -219,7 +221,7 @@ const AddProduct = () => {
                   {formData.images.map((img, i) => (
                     <img
                       key={i}
-                      src={`http://localhost:5000${img}`}
+                      src={`API_BASE_URL${img}`}
                       className="h-24 w-full object-cover rounded-lg"
                     />
                   ))}

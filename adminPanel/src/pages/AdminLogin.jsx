@@ -24,7 +24,7 @@ const AdminLogin = () => {
   const navigatedRef = useRef(false);
   const alertShownRef = useRef(false);
 
-  const API = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+  const API = import.meta.env.VITE_API_BASE_URL;
 
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth,

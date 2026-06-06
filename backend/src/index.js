@@ -20,9 +20,8 @@ const app = express();
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
-  "https://your-client.vercel.app",
-  "https://your-admin.vercel.app",
-  ,
+  "https://gumcare.vercel.app",
+  "https://admin-panel-mauve-xi-68.vercel.app",
 ];
 
 app.use(

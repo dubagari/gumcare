@@ -4,25 +4,38 @@ import Order from "../models/Order.js";
 
 export const getDashboardStats = async (req, res) => {
   try {
-    const userCount = await User.countDocuments();
-    const productCount = await Product.countDocuments();
+    // run in parallel (faster)
+    const [userCount, productCount, orderCount, revenueResult] =
+      await Promise.all([
+        User.countDocuments(),
+        Product.countDocuments(),
+        Order.countDocuments(),
+        Order.aggregate([
+          {
+            $group: {
+              _id: null,
+              totalRevenue: { $sum: "$totalPrice" },
+            },
+          },
+        ]),
+      ]);
 
-    const orders = await Order.find({ isPaid: true });
-
-    const totalRevenue = orders.reduce((sum, order) => {
-      return sum + (order.totalPrice || 0);
-    }, 0);
+    const totalRevenue =
+      revenueResult.length > 0 ? revenueResult[0].totalRevenue : 0;
 
     res.json({
       totalRevenue,
       activeUsers: userCount,
-      totalOrders: orders.length,
+      totalOrders: orderCount,
       totalProducts: productCount,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
+
 export const getUsers = async (req, res) => {
   try {
     const users = await User.find().select("-password");

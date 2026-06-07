@@ -1,13 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const API_URL = "/api/products";
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Async thunk to fetch products from backend
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch(API_URL);
+      const response = await fetch(`${API_URL}/api/products`);
       const data = await response.json();
       if (!response.ok) return rejectWithValue(data.message);
       return data;
@@ -25,7 +25,7 @@ export const createProduct = createAsyncThunk(
       const {
         auth: { user },
       } = getState();
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${API_URL}/api/products`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export const updateProductById = createAsyncThunk(
   "products/updateProductById",
   async ({ id, data, token }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
+      const response = await fetch(`${API_URL}/api/products/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ export const deleteProductById = createAsyncThunk(
   "products/deleteProductById",
   async ({ id, token }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
+      const response = await fetch(`${API_URL}/api/products/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

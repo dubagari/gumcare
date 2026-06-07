@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const API_URL = "/api/orders";
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
@@ -11,7 +11,7 @@ export const fetchOrders = createAsyncThunk(
       const {
         auth: { user },
       } = getState();
-      const response = await fetch(API_URL, {
+      const response = await fetch(`${API_URL}/api/orders`, {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },

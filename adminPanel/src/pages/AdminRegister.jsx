@@ -36,7 +36,7 @@ const AdminRegister = () => {
     e.preventDefault();
     try {
       dispatch(signinStart());
-      const res = await fetch(`${API}/admin/signupadmin`, {
+      const res = await fetch(`${API}/api/admin/signupadmin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

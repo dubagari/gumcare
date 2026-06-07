@@ -66,7 +66,7 @@ const AdminLogin = () => {
     alertShownRef.current = false;
     try {
       dispatch(signinStart());
-      const res = await fetch(`${API}/auth/loginadmin`, {
+      const res = await fetch(`${API}/api/auth/loginadmin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

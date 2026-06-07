@@ -65,7 +65,12 @@ const Dashboard = () => {
         <StatCard
           title="Total Revenue"
           value={
-            loading ? "..." : `$${stats?.totalRevenue?.toLocaleString() || 0}`
+            loading
+              ? "..."
+              : new Intl.NumberFormat("en-NG", {
+                  style: "currency",
+                  currency: "NGN",
+                }).format(stats?.totalRevenue || 0)
           }
           icon={DollarSign}
           trend="+12.5%"

@@ -8,8 +8,9 @@ const Users = () => {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [error, setError] = useState(null);
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = import.meta.env.VITE_API_BASE_URL;
 
+  console.log("API_URL:", API_URL);
   const fetchUsers = async () => {
     try {
       setLoading(true);
